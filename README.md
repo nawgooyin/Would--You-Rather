@@ -7,5 +7,6 @@
 # How to Run
 
     1. npm install
-    2. npm start
-    3. open http://localhost:3000 on a browser
+    2. in case some packages are missed, run this command - npm install redux react-redux redux-thunk react-router-dom
+    3. npm start
+    4. open http://localhost:3000 on a browser
