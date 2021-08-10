@@ -35,9 +35,9 @@ export function handleSaveQuestion(questionOne, questionTwo) {
         dispatch(showLoading());
 
     return saveQuestionInfo({
-        optionOne: questionOne,
-        optionTwo: questionTwo,
-        authedUser
+        optionOneText: questionOne,
+        optionTwoText: questionTwo,
+        author: authedUser
     })
         .then((question) => dispatch(saveQuestion(question)))
         .then(() => dispatch(hideLoading()));

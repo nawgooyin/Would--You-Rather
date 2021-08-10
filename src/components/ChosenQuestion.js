@@ -41,7 +41,7 @@ class ChosenQuestion extends Component {
                         {(isAnswered === 'false' && !showResults) && 
                             <h1>Would You Rather</h1>
                         }
-                        <img src={users[question?.author]?.avatarURL} width='200px' height='200px'/>
+                        <img src={users[question?.author]?.avatarURL} alt={`Avatar of ${users[question?.author].name}`} width='200px' height='200px'/>
                         {!showResults &&
                             <Questions question={question} users={users} isReadOnly={false} isAnswered={isAnswered} showResultAnswers={(answer) => this.handleShowResults(answer)}/> 
                         }
