@@ -20,6 +20,8 @@ class NewQuestion extends Component {
                     optionOnetext: '',
                     optionTwotext: ''
                 }))
+
+                this.props.history.push(`/`);
             })
     }
 
