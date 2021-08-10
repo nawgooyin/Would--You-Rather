@@ -1,18 +1,51 @@
 import React, { Component } from 'react';
 import Questions from './Question';
 import { connect } from 'react-redux';
+import { handleSaveAnswer } from '../actions/questions';
 
 class ChosenQuestion extends Component {
     state = {
         showResults: false
     }
 
+    handleShowResults(answer) {
+        const { dispatch } = this.props;
+        const { question_id } = this.props.match.params;
+
+        dispatch(handleSaveAnswer(question_id, answer))
+            .then(() => {
+                this.setState(() => ({
+                    showResults: true
+                }))
+            })
+    }
+
     render() {
         const { question, users, isAnswered } = this.props;
-
+        const { showResults } = this.state; 
+        
         return (
             <div>
-                <Questions question={question} users={users} isReadOnly={false} isAnswered={isAnswered} /> 
+                {isAnswered === 'false' && 
+                    <h1>Would You Rather</h1>
+                }
+                <img src={users[question.author].avatarURL} width='200px' height='200px'/>
+                {!showResults &&
+                    <Questions question={question} users={users} isReadOnly={false} isAnswered={isAnswered} showResultAnswers={(answer) => this.handleShowResults(answer)}/> 
+                }
+                {(showResults || isAnswered === 'true') && 
+                    <div className='question-info'>
+                        <div>
+                            <span>{question.optionOne.text}</span><br/>
+                            <span>{question.optionOne.votes.length} out of {users.length} votes</span>
+                        </div>
+                        <br/>
+                        <div>
+                            <span>{question.optionTwo.text}</span><br/>
+                            <span>{question.optionTwo.votes.length} out of {users.length} votes</span>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }

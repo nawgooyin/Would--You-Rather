@@ -18,15 +18,15 @@ export default function questions(state = {}, action) {
             const { qid, answer, authedUser } = action;
 
             return {
-                ...state,
-               [qid]: {
-                    ...state[qid],
-                    [answer]: {
-                        ...state[qid][answer],
-                        votes: state[qid][answer].votes.concat([authedUser])
-                    }
-                }
-            }
+				...state,
+				[qid]: {
+					...state[qid],
+					[answer]: {
+						...state[qid][answer],
+						votes: state[qid][answer].votes.concat([authedUser])
+					}
+				}
+			};
         default: 
             return state;
     }
