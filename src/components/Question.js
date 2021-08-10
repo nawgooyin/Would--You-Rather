@@ -7,19 +7,19 @@ class Question extends Component {
 
         return (
             <div className='question-info'>
-                <span>Asked by: {users[question.author]?.name}</span><br/>
+                <span>Asked by: {users[question?.author]?.name}</span><br/>
                 <button 
                     disabled={isReadOnly || isAnswered === 'true'}
                     onClick={() => showResultAnswers('optionOne')}>
-                    Option 1: {question.optionOne?.text}
+                    Option 1: {question?.optionOne?.text}
                 </button><br/>
                 <button 
                     disabled={isReadOnly || isAnswered === 'true'}
                     onClick={() =>showResultAnswers('optionTwo')}>
-                    Option 2: {question.optionTwo?.text}
+                    Option 2: {question?.optionTwo?.text}
                 </button><br/>
                 {isReadOnly && 
-                    <Link to={`/questions/${question.id}/${isAnswered}`}>
+                    <Link to={`/questions/${question?.id}/${isAnswered}`}>
                         <button>View Poll</button>
                     </Link>
                 }

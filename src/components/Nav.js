@@ -18,7 +18,7 @@ class Nav extends Component {
             <nav className='nav'>
                 <ul>
                     <li>
-                        <NavLink to='/home' exact activeClassName='active'>
+                        <NavLink to='/' exact activeClassName='active'>
                             Home
                         </NavLink>
                     </li>
@@ -36,7 +36,7 @@ class Nav extends Component {
                         {user && 
                             <div>
                                 <span className='name-padding'>Welcome {user.name}!</span>
-                                <Link to='/'>
+                                <Link to='/login'>
                                     <button onClick={() => this.logout(user.id)}>
                                         logout
                                     </button>
@@ -44,7 +44,7 @@ class Nav extends Component {
                             </div>
                         }
                         {!user && 
-                            <NavLink to='/' activeClassName='active'>
+                            <NavLink to='/login' activeClassName='active'>
                                 Login
                             </NavLink>
                         }

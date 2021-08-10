@@ -93,6 +93,10 @@ li {
   border: 1px solid black;
 }
 
+.chosen-answer {
+  border-top: 1px solid red;
+}
+
 /* Hacky but less typing in the video */
 .tweet-info > div > span:first-child {
   font-weight: bold;

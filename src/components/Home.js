@@ -20,11 +20,11 @@ class Home extends Component {
 
         const unansweredQuestions = authedUser
             ? questions.filter((question) => !Object.keys(users[authedUser]?.answers).includes(question.id)) 
-                .sort((a, b) => a.timestamp - b.timestamp)
+                .sort((a, b) => b.timestamp - a.timestamp)
             : [];
         const answeredQuestions = authedUser
             ? questions.filter((question) => Object.keys(users[authedUser]?.answers).includes(question.id))
-                .sort((a, b) => a.timestamp - b.timestamp)
+                .sort((a, b) => b.timestamp - a.timestamp)
             : [];
 
         const showQuestions = isAnswered ? answeredQuestions : unansweredQuestions;
@@ -36,7 +36,10 @@ class Home extends Component {
                         <div>
                             <button disabled={!isAnswered} onClick={() => {this.setQuestionList()}}>Unanswered Questions</button>
                             <button disabled={isAnswered} onClick={() => {this.setQuestionList()}}>Answered Questions</button>
-                        </div>
+                        </div><br/>
+                        {!authedUser &&
+                            <div>Please log in to view questions.</div>
+                        }
                         <div>
                             <ul>
                                 {showQuestions.map((question) => (

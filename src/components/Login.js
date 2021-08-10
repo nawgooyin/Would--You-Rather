@@ -20,7 +20,7 @@ class Login extends Component {
                 <ul>
                     {users.map((user) => (
                         <li key={user.id}>
-                            <Link to='/home'>
+                            <Link to='/'>
                                 <button onClick={() => this.loginUser(user.id)}>
                                     {user.name}
                                 </button>
