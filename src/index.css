@@ -85,10 +85,12 @@ li {
   cursor: pointer;
 }
 
-.tweet-info {
+.question-info {
   margin: 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
 }
 
 /* Hacky but less typing in the video */
