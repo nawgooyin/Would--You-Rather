@@ -7,7 +7,7 @@ class Question extends Component {
 
         return (
             <div className='question-info'>
-                <span>Asked by: {users[question?.author]?.name}</span><br/>
+                <span>{users[question?.author]?.name} asks...</span><br/>
                 <button 
                     disabled={isReadOnly || isAnswered === 'true'}
                     onClick={() => showResultAnswers('optionOne')}>

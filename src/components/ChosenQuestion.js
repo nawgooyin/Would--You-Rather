@@ -47,6 +47,8 @@ class ChosenQuestion extends Component {
                         }
                         {(showResults || isAnswered === 'true') && 
                             <div className='question-info'>
+                                <span>Asked by: {question?.author}</span>
+                                <br/>
                                 <div>
                                     <span>{question.optionOne.text}</span><br/>
                                     {question.optionOne.votes.includes(authedUser) && 
