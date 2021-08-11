@@ -33,10 +33,13 @@ class Home extends Component {
             <div>
                 <ul>
                     <div>
-                        <div>
-                            <button disabled={!isAnswered} onClick={() => {this.setQuestionList()}}>Unanswered Questions</button>
-                            <button disabled={isAnswered} onClick={() => {this.setQuestionList()}}>Answered Questions</button>
-                        </div><br/>
+                        {authedUser &&
+                            <div>
+                                <button disabled={!isAnswered} onClick={() => {this.setQuestionList()}}>Unanswered Questions</button>
+                                <button disabled={isAnswered} onClick={() => {this.setQuestionList()}}>Answered Questions</button>
+                            </div>
+                        }
+                        <br/>
                         {!authedUser &&
                             <div>Please log in to view questions.</div>
                         }

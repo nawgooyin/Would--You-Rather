@@ -97,6 +97,10 @@ li {
   border-top: 1px solid red;
 }
 
+.nav-flex {
+  display: flex;
+}
+
 /* Hacky but less typing in the video */
 .tweet-info > div > span:first-child {
   font-weight: bold;

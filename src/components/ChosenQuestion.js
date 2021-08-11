@@ -5,7 +5,18 @@ import { handleSaveAnswer } from '../actions/questions';
 
 class ChosenQuestion extends Component {
     state = {
+        isAnswered: false,
         showResults: false
+    }
+
+    componentDidMount() {
+        const { question, authedUser } = this.props;
+
+        if (question) {
+            this.setState(() => ({
+                isAnswered: question['optionOne']?.votes?.includes(authedUser) || question['optionTwo']?.votes?.includes(authedUser) 
+            }))
+        }
     }
 
     handleShowResults(answer) {
@@ -21,8 +32,8 @@ class ChosenQuestion extends Component {
     }
 
     render() {
-        const { question, users, isAnswered, authedUser } = this.props;
-        const { showResults } = this.state; 
+        const { question, users, authedUser } = this.props;
+        const { showResults, isAnswered } = this.state; 
 
         let totalVotes;
         let optionOnePercent;
@@ -38,14 +49,12 @@ class ChosenQuestion extends Component {
             <div>
                 {(authedUser && question) && 
                     <div>
-                        {(isAnswered === 'false' && !showResults) && 
-                            <h1>Would You Rather</h1>
-                        }
+                        <h1>Would You Rather</h1>
                         <img src={users[question?.author]?.avatarURL} alt={`Avatar of ${users[question?.author].name}`} width='200px' height='200px'/>
-                        {!showResults &&
+                        {!showResults && !isAnswered &&
                             <Questions question={question} users={users} isReadOnly={false} isAnswered={isAnswered} showResultAnswers={(answer) => this.handleShowResults(answer)}/> 
                         }
-                        {(showResults || isAnswered === 'true') && 
+                        {(showResults || isAnswered) && 
                             <div className='question-info'>
                                 <span>Asked by: {question?.author}</span>
                                 <br/>
@@ -68,13 +77,13 @@ class ChosenQuestion extends Component {
                         }
                     </div>
                 }
-                {(!authedUser) &&
+                {(!authedUser && question) &&
                     <div>Please log in to view the poll.</div>
                 }
                 {!question &&
                     <div>
                         <h1>404 ERROR NOT FOUND</h1>
-                        <span>Please return to the homepage.</span>
+                        <span>Please log in and return to the homepage.</span>
                     </div>
                 }
             </div>
@@ -83,7 +92,7 @@ class ChosenQuestion extends Component {
 }
 
 function mapStateToProps({ questions, users, authedUser }, props) {
-    const { question_id, isAnswered } = props.match.params;
+    const { question_id } = props.match.params;
 
     const questionArray = Object.keys(questions).map((question_id) => ({
         question_id: question_id,
@@ -98,7 +107,6 @@ function mapStateToProps({ questions, users, authedUser }, props) {
 	return {
         question,
         users,
-        isAnswered,
         authedUser
 	};
 }

@@ -9,17 +9,17 @@ class Question extends Component {
             <div className='question-info'>
                 <span>{users[question?.author]?.name} asks...</span><br/>
                 <button 
-                    disabled={isReadOnly || isAnswered === 'true'}
+                    disabled={isReadOnly || isAnswered}
                     onClick={() => showResultAnswers('optionOne')}>
                     Option 1: {question?.optionOne?.text}
                 </button><br/>
                 <button 
-                    disabled={isReadOnly || isAnswered === 'true'}
+                    disabled={isReadOnly || isAnswered}
                     onClick={() =>showResultAnswers('optionTwo')}>
                     Option 2: {question?.optionTwo?.text}
                 </button><br/>
                 {isReadOnly && 
-                    <Link to={`/questions/${question?.id}/${isAnswered}`}>
+                    <Link to={`/questions/${question?.id}`}>
                         <button>View Poll</button>
                     </Link>
                 }

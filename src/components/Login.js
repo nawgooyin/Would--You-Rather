@@ -15,12 +15,11 @@ class Login extends Component {
 
         return (
             <div>
-                <h2>Login</h2>
                 <h4>Click on a user to log in</h4>
                 <ul>
                     {users.map((user) => (
                         <li key={user.id}>
-                            <Link to='/'>
+                            <Link to='/home'>
                                 <button onClick={() => this.loginUser(user.id)}>
                                     {user.name}
                                 </button>

@@ -17,26 +17,30 @@ class Nav extends Component {
         return (
             <nav className='nav'>
                 <ul>
-                    <li>
-                        <NavLink to='/' exact activeClassName='active'>
-                            Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/add' activeClassName='active'>
-                            New Question
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/leaderBoard' activeClassName='active'>
-                            LeaderBoard
-                        </NavLink>
-                    </li>
+                    {user && 
+                        <div className='nav-flex'>
+                            <li>
+                                <NavLink to='/home' exact activeClassName='active'>
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/add' activeClassName='active'>
+                                    New Question
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/leaderBoard' activeClassName='active'>
+                                    LeaderBoard
+                                </NavLink>
+                            </li>
+                        </div>
+                    }
                     <li>
                         {user && 
                             <div>
                                 <span className='name-padding'>Welcome {user.name}!</span>
-                                <Link to='/login'>
+                                <Link to='/'>
                                     <button onClick={() => this.logout(user.id)}>
                                         logout
                                     </button>
@@ -44,7 +48,7 @@ class Nav extends Component {
                             </div>
                         }
                         {!user && 
-                            <NavLink to='/login' activeClassName='active'>
+                            <NavLink to='/' activeClassName='active'>
                                 Login
                             </NavLink>
                         }
