@@ -48,9 +48,11 @@ class Nav extends Component {
                             </div>
                         }
                         {!user && 
-                            <NavLink to='/' activeClassName='active'>
-                                Login
-                            </NavLink>
+                            <div className='login-class'>
+                                <NavLink to='/' activeClassName='active'>
+                                    Login
+                                </NavLink>
+                            </div>
                         }
                     </li>
                 </ul>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Questions from './Question';
 import { connect } from 'react-redux';
 import { handleSaveAnswer } from '../actions/questions';
+import { Link } from 'react-router-dom';
 
 class ChosenQuestion extends Component {
     state = {
@@ -80,10 +81,19 @@ class ChosenQuestion extends Component {
                 {(!authedUser && question) &&
                     <div>Please log in to view the poll.</div>
                 }
-                {!question &&
+                {(!authedUser && !question)  &&
                     <div>
                         <h1>404 ERROR NOT FOUND</h1>
-                        <span>Please log in and return to the homepage.</span>
+                        <span>Please log in.</span>
+                    </div>
+                }
+                {(authedUser && !question) && 
+                    <div>
+                        <h1>404 ERROR NOT FOUND</h1>
+                        <span>Please return to the homepage.</span> <br/><br/>
+                        <Link to={`/home`}>
+                            <button>Go Home</button>
+                        </Link>
                     </div>
                 }
             </div>

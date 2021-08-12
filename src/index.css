@@ -97,6 +97,10 @@ li {
   border-top: 1px solid red;
 }
 
+.login-class {
+  padding-left: 50em;
+}
+
 .nav-flex {
   display: flex;
 }

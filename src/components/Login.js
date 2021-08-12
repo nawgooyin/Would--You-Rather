@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
+    state = {
+        redirectToReferrer: false
+    }
+
     loginUser = (id) => {
         const { dispatch } = this.props;
 
         dispatch(setAuthedUser(id));
+
+        this.setState(() => ({
+            redirectToReferrer: true
+        }))
     }
 
     render() {
         const { users } = this.props;
+
+        if (this.state.redirectToReferrer === true) {
+            this.props.history.goBack()
+        }
 
         return (
             <div>
@@ -19,11 +31,9 @@ class Login extends Component {
                 <ul>
                     {users.map((user) => (
                         <li key={user.id}>
-                            <Link to='/home'>
-                                <button onClick={() => this.loginUser(user.id)}>
-                                    {user.name}
-                                </button>
-                            </Link>
+                            <button onClick={() => this.loginUser(user.id)}>
+                                {user.name}
+                            </button>
                         </li>
                     ))}
                 </ul>
