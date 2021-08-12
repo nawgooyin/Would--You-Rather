@@ -4,26 +4,16 @@ import { setAuthedUser } from '../actions/authedUser';
 import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
-    state = {
-        redirectToReferrer: false
-    }
-
     loginUser = (id) => {
         const { dispatch } = this.props;
 
         dispatch(setAuthedUser(id));
 
-        this.setState(() => ({
-            redirectToReferrer: true
-        }))
+        this.props.history.push('/home');
     }
 
     render() {
         const { users } = this.props;
-
-        if (this.state.redirectToReferrer === true) {
-            this.props.history.goBack()
-        }
 
         return (
             <div>
