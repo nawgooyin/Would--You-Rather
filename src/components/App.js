@@ -10,6 +10,7 @@ import ChosenQuestion from './ChosenQuestion';
 import LeaderBoard from './LeaderBoard';
 import LoadingBar from 'react-redux-loading';
 import Notfound  from './NotFound';
+import ProtectedRoute from './ProtectedRoute';
 
 class App extends Component {
     componentDidMount() {
@@ -28,11 +29,11 @@ class App extends Component {
                             : 
                                 <main>
 						            <Switch>
-                                        <Route path='/home' component={Home}/>
+                                        <ProtectedRoute path='/home' component={Home} authedUser={this.props.authedUser}/>
                                         <Route path='/' exact component={Login}/>
-                                        <Route path='/add' component={NewQuestion} />
-                                        <Route path='/leaderBoard' component={LeaderBoard} />
-                                        <Route path='/questions/:question_id' component={ChosenQuestion}/>
+                                        <ProtectedRoute path='/add' component={NewQuestion} authedUser={this.props.authedUser}/>
+                                        <ProtectedRoute path='/leaderBoard' component={LeaderBoard} authedUser={this.props.authedUser}/>
+                                        <ProtectedRoute path='/questions/:question_id' component={ChosenQuestion} authedUser={this.props.authedUser}/>
                                         <Route component={Notfound} />
                                     </Switch>
 					            </main>}                            
@@ -43,9 +44,10 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ users, questions }) {
+function mapStateToProps({ users, questions, authedUser }) {
     return {
-        loading: !users && !questions 
+        loading: !users && !questions ,
+        authedUser
     }
 }
 

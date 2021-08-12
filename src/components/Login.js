@@ -2,18 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
     loginUser = (id) => {
         const { dispatch } = this.props;
 
         dispatch(setAuthedUser(id));
-
-        this.props.history.push('/home');
     }
 
     render() {
-        const { users } = this.props;
+        const { users, authedUser } = this.props;
+        const { from } = this.props.location.state || { from: { pathname: '/home' } };
+
+        console.log(this.props.location.state);
+
+        if (authedUser) {
+            return <Redirect to={from} />;
+        }
 
         return (
             <div>
@@ -32,12 +38,13 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({ users, authedUser }) {
 	return {
 		users: Object.keys(users).map((id) => ({
 			id: id,
 			name: users[id].name
-		}))
+		})),
+        authedUser
 	};
 }
 
